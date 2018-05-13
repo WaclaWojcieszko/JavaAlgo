@@ -131,6 +131,25 @@ public class SLLTest {
         Assert.assertNull(sll.findNth(3));
 
     }
+
+    @Test
+    public void testBeginAfter(){
+        SLL<String> sll = new SLL<>();
+        sll.append("Ala");
+        sll.append("ma");
+        sll.append("Asa");
+        sll.append("Kier");
+
+        sll.beginAfter(sll.find("ma"));
+
+        Assert.assertEquals(sll.find("Asa"), sll.findNth(0));
+
+        Assert.assertEquals(sll.find("Ala"), sll.findNth(2));
+
+        Assert.assertEquals(sll.find("ma"), sll.findNth(3));
+
+    }
+
 }
 
 

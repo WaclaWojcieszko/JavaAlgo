@@ -106,7 +106,19 @@ public class SLL<T> {
         item.next = item.next.next;
 
 
+    }
 
+    public void beginAfter (Node item){
+
+        Node ref = item;
+
+        while (ref.next != null){
+            ref = ref.next;
+        }
+        ref.next = head;
+
+        head = item.next;
+        item.next = null;
 
 
     }
