@@ -17,6 +17,7 @@ public class SLLTest {
 
     @Before
     public void before() throws Exception {
+
     }
 
     @After
@@ -62,10 +63,10 @@ public class SLLTest {
     public void testSLLFindEnth() {
 
         SLL<String> sll = new SLL<>();
-        sll.append("Ala");
-        sll.append("ma");
-        sll.append("Asa");
-        sll.append("Kier");
+        sll.append(new SLL.Node("Ala"));
+        sll.append(new SLL.Node("ma"));
+        sll.append(new SLL.Node("Asa"));
+        sll.append(new SLL.Node("Kier"));
 
         Assert.assertEquals("Ala", sll.findNth(0).getData());
 
@@ -110,7 +111,7 @@ public class SLLTest {
     public void testSLLdelete01() {
 
         SLL<String> sll = new SLL<>();
-        sll.append("Ala");
+        sll.append(ala);
         sll.append("ma");
         sll.append("Asa");
         sll.append("Kier");
@@ -147,6 +148,8 @@ public class SLLTest {
         Assert.assertEquals(sll.find("Ala"), sll.findNth(2));
 
         Assert.assertEquals(sll.find("ma"), sll.findNth(3));
+
+        Assert.assertNull(sll.findNth(4));
 
     }
 

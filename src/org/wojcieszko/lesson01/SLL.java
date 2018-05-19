@@ -2,7 +2,7 @@ package org.wojcieszko.lesson01;
 
 public class SLL<T> {
 
-    public class Node<T> {
+    public static class Node<T> {
 
         public T getData() {
             return data;
@@ -16,6 +16,7 @@ public class SLL<T> {
             this.data = data;
             this.next = null;
         }
+
     }
 
     private Node<T> head;
@@ -26,16 +27,15 @@ public class SLL<T> {
 
     public int count() {
         int count = 0;
-        Node ref = head;
-        while (ref != null) {
-            ++count;
+
+        for (Node ref = head; ref != null; ++count) {
             ref = ref.next;
         }
+
         return count;
     }
 
-    public void append(T newData) {
-        Node newNode = new Node(newData);
+    public void append(Node<T> newNode) {
 
         if (head == null) {
             head = newNode;
@@ -67,7 +67,7 @@ public class SLL<T> {
 
     public Node findNth(Integer nth) {
         Node ref = head;
-        Integer counter = 0;
+        int counter = 0;
         while (ref != null) {
             if (counter == nth) {
                 return ref;
@@ -91,13 +91,13 @@ public class SLL<T> {
         }
     }
 
-    public void deleteNode(Node item){
+    public void deleteNode(Node item) {
 
-        if (item.next == null){
+        if (item.next == null) {
             return;
         }
 
-        if (item == null){
+        if (item == null) {
             head = head.next;
             return;
         }
@@ -108,11 +108,11 @@ public class SLL<T> {
 
     }
 
-    public void beginAfter (Node item){
+    public void beginAfter(Node item) {
 
         Node ref = item;
 
-        while (ref.next != null){
+        while (ref.next != null) {
             ref = ref.next;
         }
         ref.next = head;
