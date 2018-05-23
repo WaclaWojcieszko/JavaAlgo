@@ -79,8 +79,7 @@ public class SLL<T> {
         return null;
     }
 
-    public void insert(T newData, Node item) {
-        Node newNode = new Node(newData);
+    public void insert(Node newNode, Node item) {
 
         if (item == null) {
             newNode.next = head;

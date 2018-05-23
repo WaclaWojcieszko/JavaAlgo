@@ -66,3 +66,35 @@ D E F A B _C_
 commit push
 www: pull request LIST -> MASTER + @jbanaszczyk
 
+## Array
+
+często wykorzystuje się listy jako przygotowanie tablicy jeśli potrzeba dużo operacji i zmian do utworzenia tabeli
+
+Resize - trzeba wykorzystać - zabezpieczyć więcej miejsca
+
+przesuwa się od tylu:
+koszt O(n) for... 
+a[i] = a[i-1]
++ ukryty koszt - java sprawdza zawsze czy się mieści w granicy tabeli < > koszt*5
+
+Arrays.copyArray(source, destination, counter)
+
+
+## Generator liczb losowych
+
+liczby losowe nie są losowe - do włamań - jeśli znajdzie się cykl można np. podszyć sie pod sesję następnego
+
+ocena liczb losowych - pod kątem statystycznym - czy są szumem białym, jak sa rozłożone
+
+generowanie współcześnie dla dowolnego rozkładu
+
+dawniej liniowy int
+
+pseudo i true random generator - PRNG i TRNG (można kupić - używają go wielkie instytuty);
+
+kongruencyjny (reszta z dzielenia) generator liniowy - kongruencja sumy to suma kongruencji
+(Ax + B) % C - liczby z zakresu 0-C
+metody #ujące w kryptografii
+
+nie używać rozkładów z rozkładów.
+

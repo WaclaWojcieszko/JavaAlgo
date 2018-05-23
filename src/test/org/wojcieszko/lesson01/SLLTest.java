@@ -38,11 +38,11 @@ public class SLLTest {
 
         Assert.assertEquals(0, sll.count());
 
-        sll.append(3);
+        sll.append(new SLL.Node(3));
 
         Assert.assertEquals(1, sll.count());
 
-        sll.append(2);
+        sll.append(new SLL.Node(2));
 
         Assert.assertEquals(2, sll.count());
 
@@ -52,8 +52,9 @@ public class SLLTest {
     public void testSLLFind() {
 
         SLL<Integer> sll = new SLL<>();
-        sll.append(3);
-        sll.append(2);
+
+        sll.append(new SLL.Node(3));
+        sll.append(new SLL.Node(2));
 
         Assert.assertNotNull(sll.find(3));
 
@@ -77,7 +78,7 @@ public class SLLTest {
     public void testSLLisnert() {
 
         SLL<String> sll = new SLL<>();
-        sll.insert("Ala", null);
+        sll.insert(new SLL.Node("Ala"), null);
         Assert.assertEquals("Ala", sll.findNth(0).getData());
 
     }
@@ -87,9 +88,9 @@ public class SLLTest {
     public void testSLLinsert01() {
 
         SLL<String> sll = new SLL<>();
-        sll.append("Ala");
-        sll.append("Asa");
-        sll.insert("ma", sll.find("Ala"));
+        sll.append(new SLL.Node("Ala"));
+        sll.append(new SLL.Node("Asa"));
+        sll.insert(new SLL.Node("ma"), sll.find("Ala"));
         Assert.assertEquals("ma", sll.findNth(1).getData());
 
     }
@@ -98,10 +99,10 @@ public class SLLTest {
     public void testSLLdelete() {
 
         SLL<String> sll = new SLL<>();
-        sll.append("Ala");
-        sll.append("ma");
-        sll.append("Asa");
-        sll.append("Kier");
+        sll.append(new SLL.Node("Ala"));
+        sll.append(new SLL.Node("ma"));
+        sll.append(new SLL.Node("Asa"));
+        sll.append(new SLL.Node("Kier"));
         sll.deleteNode(sll.find("Ala"));
         Assert.assertEquals("ma", sll.findNth(1).getData());
 
@@ -111,10 +112,10 @@ public class SLLTest {
     public void testSLLdelete01() {
 
         SLL<String> sll = new SLL<>();
-        sll.append(ala);
-        sll.append("ma");
-        sll.append("Asa");
-        sll.append("Kier");
+        sll.append(new SLL.Node("Ala"));
+        sll.append(new SLL.Node("ma"));
+        sll.append(new SLL.Node("Asa"));
+        sll.append(new SLL.Node("Kier"));
         sll.deleteNode(sll.find("ma"));
         Assert.assertEquals("Kier", sll.findNth(2).getData());
 
@@ -124,10 +125,10 @@ public class SLLTest {
     public void testSLLdelete02() {
 
         SLL<String> sll = new SLL<>();
-        sll.append("Ala");
-        sll.append("ma");
-        sll.append("Asa");
-        sll.append("Kier");
+        sll.append(new SLL.Node("Ala"));
+        sll.append(new SLL.Node("ma"));
+        sll.append(new SLL.Node("Asa"));
+        sll.append(new SLL.Node("Kier"));
         sll.deleteNode(sll.find("Asa"));
         Assert.assertNull(sll.findNth(3));
 
@@ -136,10 +137,10 @@ public class SLLTest {
     @Test
     public void testBeginAfter(){
         SLL<String> sll = new SLL<>();
-        sll.append("Ala");
-        sll.append("ma");
-        sll.append("Asa");
-        sll.append("Kier");
+        sll.append(new SLL.Node("Ala"));
+        sll.append(new SLL.Node("ma"));
+        sll.append(new SLL.Node("Asa"));
+        sll.append(new SLL.Node("Kier"));
 
         sll.beginAfter(sll.find("ma"));
 
