@@ -104,7 +104,7 @@ public class SLLTest {
         sll.append(new SLL.Node("Asa"));
         sll.append(new SLL.Node("Kier"));
         sll.deleteNode(sll.find("Ala"));
-        Assert.assertEquals("ma", sll.findNth(1).getData());
+        Assert.assertEquals("Asa", sll.findNth(1).getData());
 
     }
 
@@ -135,14 +135,14 @@ public class SLLTest {
     }
 
     @Test
-    public void testBeginAfter(){
+    public void testHead2Tails() {
         SLL<String> sll = new SLL<>();
         sll.append(new SLL.Node("Ala"));
         sll.append(new SLL.Node("ma"));
         sll.append(new SLL.Node("Asa"));
         sll.append(new SLL.Node("Kier"));
 
-        sll.beginAfter(sll.find("ma"));
+        sll.head2Tails(sll.find("ma"));
 
         Assert.assertEquals(sll.find("Asa"), sll.findNth(0));
 

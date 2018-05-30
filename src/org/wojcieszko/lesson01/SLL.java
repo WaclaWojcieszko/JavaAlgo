@@ -92,22 +92,20 @@ public class SLL<T> {
 
     public void deleteNode(Node item) {
 
-        if (item.next == null) {
-            return;
-        }
-
         if (item == null) {
             head = head.next;
             return;
+        } else if (item.next == null) {
+            return;
+        } else if (item.next.next == null) {
+            item.next = null;
+        } else {
+            item.next = item.next.next;
         }
-
-
-        item.next = item.next.next;
-
 
     }
 
-    public void beginAfter(Node item) {
+    public void head2Tails(Node item) {
 
         Node ref = item;
 
