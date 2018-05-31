@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class Chess {
 
+    public Tower tower = new Tower();
+
     public ArrayList<int[]> arrayList = new ArrayList<>();
 
     public void towerMoves(int[] position) {
 
-        int[][] directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        int[] currentPosition;
 
-        int[] currentPosition = position.clone();
+        for (int[] item : tower.getTowerDirections()) {
 
-        for (int[] item : directions) {
-
-            currentPosition = position.clone();
+            currentPosition = tower.getFigurePosition().clone();
 
             while (true) {
 
