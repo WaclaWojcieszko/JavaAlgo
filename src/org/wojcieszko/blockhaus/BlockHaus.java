@@ -15,14 +15,19 @@ public class BlockHaus {
         this.blockHeight = blockHeight;
     }
 
-    public void viewAnalysis(){
+    public void viewAnalysis() {
+
         blockView = blockHeight.clone();
+        int highest = blockHeight[blockHeight.length - 1];
 
-        for (int i = blockHeight.length - 1; i > 0; --i){
+        blockView[blockHeight.length - 1] = 1;
 
-            if (blockHeight[i - 1] > blockHeight[i]){
-                blockView[i - 1] = blockHeight[i] + 1;
-            } else if (blockHeight[i - 1] <= blockHeight[i]){
+        for (int i = blockHeight.length - 1; i > 0; --i) {
+
+            if (blockHeight[i - 1] > highest) {
+                blockView[i - 1] = highest + 1;
+                highest = blockView[i - 1];
+            } else if (blockHeight[i - 1] <= highest) {
                 blockView[i - 1] = 0;
             }
         }
