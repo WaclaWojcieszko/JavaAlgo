@@ -38,14 +38,22 @@ public class SetHasz<T> {
 
     }
 
-    public void optimize(){
-        int newSize = size;
-        for (int i = 0; i < topList.size(); ++i) {
-            int tmpSize = topList.get(i).size();
-            if (tmpSize > newSize * 4){
-
-            }
-        }
-    }
+//    public void optimize() {
+//        int newSize = size;
+//        for (int i = 0; i < topList.size(); ++i) {
+//            int tmpSize = topList.get(i).size();
+//            if (tmpSize > newSize * 4) {
+//                newSize = tmpSize / 4;
+//            }
+//        }
+//        ArrayList<List<T>> tmpList = new ArrayList<>(newSize);
+//
+//        for (int i = 0; i < size; ++i) {
+//
+//            List<T> hList = topList.get(i);
+//
+//        }
+//
+//    }
 
 }
