@@ -34,14 +34,14 @@ public class MyTree<Integer> {
 
     }
 
-    public void appendLeaf(MyTreeNode myLeaf) throws Exception {
+    public void appendLeaf(MyTreeNode myLeaf) {
 
 
         if (myLeaf.getRoot() == null) {
             myLeaf.setRoot(root);
         }
         if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.BIGGER) {
-            if (!hasLeftLeaf(myLeaf)) {
+            if (!hasLeftLeaf(myLeaf.getRoot())) {
                 myLeaf.getRoot().setLeftLeaf(myLeaf);
 
             } else {
@@ -50,7 +50,7 @@ public class MyTree<Integer> {
 
             }
         } else if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.SMALLER) {
-            if (!hasRightLeaf(myLeaf)) {
+            if (!hasRightLeaf(myLeaf.getRoot())) {
                 myLeaf.getRoot().setRightLeaf(myLeaf);
             } else {
                 myLeaf.setRoot(myLeaf.getRoot().getRightLeaf());
