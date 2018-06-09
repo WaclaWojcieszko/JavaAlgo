@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.wojcieszko.tree.MyTree;
+import org.wojcieszko.tree.MyTreeNode;
 
 /**
  * MyTree Tester.
@@ -95,7 +96,7 @@ public class MyTreeTest {
 
     public void testAppend() throws Exception {
 
-        MyTree.MyTreeNode myTreeNode = new MyTree.MyTreeNode(3);
+        MyTreeNode myTreeNode = new MyTreeNode(3);
         MyTree myTree = new MyTree(12);
         myTree.appendLeaf(myTreeNode);
 
@@ -107,9 +108,9 @@ public class MyTreeTest {
 
     public void testAppend02() throws Exception {
 
-        MyTree.MyTreeNode myTreeNode1 = new MyTree.MyTreeNode(30);
-        MyTree.MyTreeNode myTreeNode2 = new MyTree.MyTreeNode(3);
-        MyTree.MyTreeNode myTreeNode3 = new MyTree.MyTreeNode(5);
+        MyTreeNode myTreeNode1 = new MyTreeNode(30);
+        MyTreeNode myTreeNode2 = new MyTreeNode(3);
+        MyTreeNode myTreeNode3 = new MyTreeNode(5);
         MyTree myTree = new MyTree(12);
         myTree.appendLeaf(myTreeNode1);
         myTree.appendLeaf(myTreeNode2);
@@ -122,4 +123,21 @@ public class MyTreeTest {
 
     }
 
+    @Test
+    public void testfind() throws Exception {
+
+        MyTreeNode myTreeNode1 = new MyTreeNode(30);
+        MyTreeNode myTreeNode2 = new MyTreeNode(3);
+        MyTreeNode myTreeNode3 = new MyTreeNode(5);
+        MyTree myTree = new MyTree(12);
+        myTree.appendLeaf(myTreeNode1);
+        myTree.appendLeaf(myTreeNode2);
+        myTree.appendLeaf(myTreeNode2);
+        myTree.appendLeaf(myTreeNode3);
+
+        Assert.assertEquals(myTree.findLeaf(myTreeNode1), myTree.root.getRightLeaf());
+        Assert.assertEquals(myTree.findLeaf(myTreeNode2), myTree.root.getLeftLeaf());
+        Assert.assertEquals(myTree.findLeaf(myTreeNode3), myTree.root.getLeftLeaf().getRightLeaf());
+
+    }
 } 
