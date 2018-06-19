@@ -24,11 +24,11 @@ public class MyTree<Integer> {
 
     public Compare compareDataValue(MyTreeNode first, MyTreeNode second) {
 
-        if ((int) first.getData() > (int) second.getData()) {
+        if ((int) first.getData() < (int) second.getData()) {
             return Compare.BIGGER;
         } else if ((int) first.getData() == (int) second.getData()) {
             return Compare.EQUAL;
-        } else if ((int) first.getData() < (int) second.getData()) {
+        } else if ((int) first.getData() > (int) second.getData()) {
             return Compare.SMALLER;
         } else return null;
 
@@ -40,7 +40,7 @@ public class MyTree<Integer> {
         if (myLeaf.getRoot() == null) {
             myLeaf.setRoot(root);
         }
-        if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.BIGGER) {
+    if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.SMALLER) {
             if (!hasLeftLeaf(myLeaf.getRoot())) {
                 myLeaf.getRoot().setLeftLeaf(myLeaf);
 
@@ -49,7 +49,7 @@ public class MyTree<Integer> {
                 appendLeaf(myLeaf);
 
             }
-        } else if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.SMALLER) {
+        } else if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.BIGGER) {
             if (!hasRightLeaf(myLeaf.getRoot())) {
                 myLeaf.getRoot().setRightLeaf(myLeaf);
             } else {
@@ -61,31 +61,27 @@ public class MyTree<Integer> {
 
     public MyTreeNode findLeaf(MyTreeNode myLeaf) {
 
-        MyTreeNode tmpRoot = myLeaf.getRoot();
-
         if (myLeaf.getRoot() == null) {
-            tmpRoot = root;
+            myLeaf.setRoot(this.root);
         }
 
-        if (compareDataValue(tmpRoot, myLeaf) == Compare.EQUAL) {
-            return tmpRoot;
-        } else if (compareDataValue(tmpRoot, myLeaf) == Compare.SMALLER) {
-            myLeaf.setRoot(tmpRoot.getLeftLeaf());
-            if (myLeaf.getRoot() == null) {
-                return null;
-            } else {
-                findLeaf(myLeaf);
-            }
-        } else if (compareDataValue(tmpRoot, myLeaf) == Compare.BIGGER) {
-            myLeaf.setRoot(tmpRoot.getRightLeaf());
-            if (myLeaf.getRoot() == null) {
-                return null;
-            } else {
-                findLeaf(myLeaf);
-            }
-        }
+        if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.EQUAL) {
+            return myLeaf.getRoot();
+        } else if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.SMALLER) {
+            if (myLeaf.getRoot().getLeftLeaf() != null) {
 
-        return null;
+                myLeaf.setRoot(myLeaf.getRoot().getLeftLeaf());
+                findLeaf(myLeaf);
+            }
+        } else if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.BIGGER) {
+            if (myLeaf.getRoot().getRightLeaf() != null) {
+
+                myLeaf.setRoot(myLeaf.getRoot().getRightLeaf());
+                findLeaf(myLeaf);
+            }
+        } else return null;
+
+        return findLeaf(myLeaf);
     }
 
 }

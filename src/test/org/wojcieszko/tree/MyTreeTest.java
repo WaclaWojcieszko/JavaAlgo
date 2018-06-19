@@ -111,15 +111,20 @@ public class MyTreeTest {
         MyTreeNode myTreeNode1 = new MyTreeNode(30);
         MyTreeNode myTreeNode2 = new MyTreeNode(3);
         MyTreeNode myTreeNode3 = new MyTreeNode(5);
+        MyTreeNode myTreeNode4 = new MyTreeNode(1);
         MyTree myTree = new MyTree(12);
         myTree.appendLeaf(myTreeNode1);
         myTree.appendLeaf(myTreeNode2);
         myTree.appendLeaf(myTreeNode2);
         myTree.appendLeaf(myTreeNode3);
+        myTree.appendLeaf(myTreeNode4);
 
+        Assert.assertEquals(myTreeNode1, myTree.root.getRightLeaf());
+        Assert.assertEquals(myTreeNode1.getRoot().getData(), myTree.root.getData());
         Assert.assertEquals(30, myTree.root.getRightLeaf().getData());
         Assert.assertEquals(3, myTree.root.getLeftLeaf().getData());
         Assert.assertEquals(5, myTree.root.getLeftLeaf().getRightLeaf().getData());
+        Assert.assertEquals(1, myTree.root.getLeftLeaf().getLeftLeaf().getData());
 
     }
 
@@ -135,9 +140,9 @@ public class MyTreeTest {
         myTree.appendLeaf(myTreeNode2);
         myTree.appendLeaf(myTreeNode3);
 
-        Assert.assertEquals(myTree.findLeaf(myTreeNode1), myTree.root.getRightLeaf());
-        Assert.assertEquals(myTree.findLeaf(myTreeNode2), myTree.root.getLeftLeaf());
-        Assert.assertEquals(myTree.findLeaf(myTreeNode3), myTree.root.getLeftLeaf().getRightLeaf());
+        Assert.assertEquals(myTree.root.getRightLeaf().getData(), myTree.findLeaf(myTreeNode1).getData());
+        Assert.assertEquals(myTree.root.getLeftLeaf().getData(), myTree.findLeaf(myTreeNode2).getData());
+        Assert.assertEquals(myTree.root.getLeftLeaf().getRightLeaf().getData(), myTree.findLeaf(myTreeNode3).getData());
 
     }
 } 
