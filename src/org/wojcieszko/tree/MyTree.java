@@ -34,27 +34,24 @@ public class MyTree<Integer> {
 
     }
 
-    public void appendLeaf(MyTreeNode myLeaf) {
 
+    public void appendLeaf(MyTreeNode tmpRoot, MyTreeNode myLeaf) {
 
-        if (myLeaf.getRoot() == null) {
-            myLeaf.setRoot(root);
-        }
-    if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.SMALLER) {
+        myLeaf.setRoot(tmpRoot);
+
+        if (compareDataValue(tmpRoot, myLeaf) == Compare.SMALLER) {
             if (!hasLeftLeaf(myLeaf.getRoot())) {
                 myLeaf.getRoot().setLeftLeaf(myLeaf);
 
             } else {
-                myLeaf.setRoot(myLeaf.getRoot().getLeftLeaf());
-                appendLeaf(myLeaf);
-
+                appendLeaf(myLeaf.getRoot().getLeftLeaf(), myLeaf);
             }
-        } else if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.BIGGER) {
+
+        } else if (compareDataValue(tmpRoot, myLeaf) == Compare.BIGGER) {
             if (!hasRightLeaf(myLeaf.getRoot())) {
                 myLeaf.getRoot().setRightLeaf(myLeaf);
             } else {
-                myLeaf.setRoot(myLeaf.getRoot().getRightLeaf());
-                appendLeaf(myLeaf);
+                appendLeaf(myLeaf.getRoot().getRightLeaf(), myLeaf);
             }
         }
     }
@@ -82,6 +79,56 @@ public class MyTree<Integer> {
         } else return null;
 
         return findLeaf(myLeaf);
+    }
+
+
+    public void deleteNode(MyTreeNode myLeaf) {
+
+        if (compareDataValue(root, myLeaf) == Compare.EQUAL) {
+            if (hasLeftLeaf(root)) {
+
+                root.getLeftLeaf().setRoot(null);
+                appendLeaf(root.getLeftLeaf(), root.getRightLeaf());
+                root = root.getLeftLeaf();
+
+            } else if (hasRightLeaf(root)) {
+
+                root.getRightLeaf().setRoot(null);
+                appendLeaf(root.getRightLeaf(), root.getLeftLeaf());
+                root = root.getRightLeaf();
+
+            } else {
+                root = null;
+            }
+
+        } else if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.BIGGER) {
+
+            myLeaf.getRoot().setRightLeaf(null);
+
+            if (hasRightLeaf(myLeaf)) {
+                myLeaf.getRightLeaf().setRoot(null);
+                appendLeaf(root, myLeaf.getRightLeaf());
+            }
+            if (hasLeftLeaf(myLeaf)) {
+                myLeaf.getLeftLeaf().setRoot(null);
+                appendLeaf(root, myLeaf.getLeftLeaf());
+            }
+
+
+        } else if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.SMALLER) {
+
+            myLeaf.getRoot().setLeftLeaf(null);
+
+            if (hasRightLeaf(myLeaf)) {
+                myLeaf.getRightLeaf().setRoot(null);
+                appendLeaf(root, myLeaf.getRightLeaf());
+            }
+            if (hasRightLeaf(myLeaf)) {
+                myLeaf.getLeftLeaf().setRoot(null);
+                appendLeaf(root, myLeaf.getLeftLeaf());
+            }
+
+        }
     }
 
 }
