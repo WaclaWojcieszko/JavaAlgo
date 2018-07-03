@@ -19,7 +19,7 @@ public class MyTreeTest {
     @Before
     public void before() throws Exception {
 
-        MyTree<Integer> myTree = new MyTree(12);
+        MyTree<Integer> myTree = new MyTree();
 
 
     }
@@ -95,45 +95,55 @@ public class MyTreeTest {
     @Test
 
     public void testAppend() throws Exception {
+        MyTree myTree = new MyTree();
+        MyTreeNode myTreeNodeRoot = new MyTreeNode(12);
+        myTree.appendLeaf(myTree.root, myTreeNodeRoot);
 
         MyTreeNode myTreeNode = new MyTreeNode(3);
-        MyTree myTree = new MyTree(12);
+
+
         myTree.appendLeaf(myTree.root, myTreeNode);
 
         Assert.assertEquals(myTreeNode, myTree.root.getLeftLeaf());
-        Assert.assertEquals(3, myTree.root.getLeftLeaf().getData());
+        Assert.assertTrue(myTree.root.getLeftLeaf().getData().equals(3));
     }
 
     @Test
 
     public void testAppend02() throws Exception {
+        MyTree myTree = new MyTree();
+        MyTreeNode myTreeNodeRoot = new MyTreeNode(12);
+        myTree.appendLeaf(myTree.root, myTreeNodeRoot);
 
         MyTreeNode myTreeNode1 = new MyTreeNode(30);
         MyTreeNode myTreeNode2 = new MyTreeNode(3);
         MyTreeNode myTreeNode3 = new MyTreeNode(5);
         MyTreeNode myTreeNode4 = new MyTreeNode(1);
-        MyTree myTree = new MyTree(12);
+
         myTree.appendLeaf(myTree.root, myTreeNode1);
         myTree.appendLeaf(myTree.root, myTreeNode2);
         myTree.appendLeaf(myTree.root, myTreeNode3);
         myTree.appendLeaf(myTree.root, myTreeNode4);
 
         Assert.assertEquals(myTreeNode1, myTree.root.getRightLeaf());
-        Assert.assertEquals(myTreeNode1.getRoot().getData(), myTree.root.getData());
-        Assert.assertEquals(30, myTree.root.getRightLeaf().getData());
-        Assert.assertEquals(3, myTree.root.getLeftLeaf().getData());
-        Assert.assertEquals(5, myTree.root.getLeftLeaf().getRightLeaf().getData());
-        Assert.assertEquals(1, myTree.root.getLeftLeaf().getLeftLeaf().getData());
+        Assert.assertEquals(myTreeNode1.getParent().getData(), myTree.root.getData());
+        Assert.assertTrue(myTree.root.getRightLeaf().getData().equals(30));
+        Assert.assertTrue( myTree.root.getLeftLeaf().getData().equals(3));
+        Assert.assertTrue(myTree.root.getLeftLeaf().getRightLeaf().getData().equals(5));
+        Assert.assertTrue( myTree.root.getLeftLeaf().getLeftLeaf().getData().equals(1));
 
     }
 
     @Test
     public void testfind() throws Exception {
+        MyTree myTree = new MyTree();
+        MyTreeNode myTreeNodeRoot = new MyTreeNode(12);
+        myTree.appendLeaf(myTree.root, myTreeNodeRoot);
 
         MyTreeNode myTreeNode1 = new MyTreeNode(30);
         MyTreeNode myTreeNode2 = new MyTreeNode(3);
         MyTreeNode myTreeNode3 = new MyTreeNode(5);
-        MyTree myTree = new MyTree(12);
+
         myTree.appendLeaf(myTree.root, myTreeNode1);
         myTree.appendLeaf(myTree.root, myTreeNode2);
         myTree.appendLeaf(myTree.root, myTreeNode3);
@@ -148,12 +158,15 @@ public class MyTreeTest {
 
     @Test
     public void testDelete() throws Exception {
+        MyTree myTree = new MyTree();
+        MyTreeNode myTreeNodeRoot = new MyTreeNode(12);
+        myTree.appendLeaf(myTree.root, myTreeNodeRoot);
 
         MyTreeNode myTreeNode1 = new MyTreeNode(30);
         MyTreeNode myTreeNode2 = new MyTreeNode(3);
         MyTreeNode myTreeNode3 = new MyTreeNode(5);
         MyTreeNode myTreeNode4 = new MyTreeNode(1);
-        MyTree myTree = new MyTree(12);
+
         myTree.appendLeaf(myTree.root, myTreeNode1);
         myTree.appendLeaf(myTree.root, myTreeNode2);
         myTree.appendLeaf(myTree.root, myTreeNode3);

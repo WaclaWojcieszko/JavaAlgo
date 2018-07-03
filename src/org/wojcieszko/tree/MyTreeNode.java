@@ -1,23 +1,23 @@
 package org.wojcieszko.tree;
 
-public class MyTreeNode<Integer> {
+public class MyTreeNode<T extends Comparable <T>> {
 
-    private MyTreeNode root;
-    private Integer data;
+    private MyTreeNode parent;
+    private T data;
 
     private MyTreeNode leftLeaf;
     private MyTreeNode rightLeaf;
 
-    public MyTreeNode(Integer data) {
+    public MyTreeNode(T data) {
         this.data = data;
     }
 
 
-    public Integer getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(Integer data) {
+    public void setData(T data) {
         this.data = data;
     }
 
@@ -37,12 +37,12 @@ public class MyTreeNode<Integer> {
         this.rightLeaf = rightLeaf;
     }
 
-    public MyTreeNode getRoot() {
-        return root;
+    public MyTreeNode getParent() {
+        return parent;
     }
 
-    public void setRoot (MyTreeNode root) {
-        this.root = root;
+    public void setParent(MyTreeNode parent) {
+        this.parent = parent;
     }
 
 }

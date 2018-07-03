@@ -1,28 +1,20 @@
 package org.wojcieszko.tree;
 
-public class MyTree<Integer> {
-    public MyTreeNode<Integer> root;
+public class MyTree<T> {
+    public MyTreeNode root;
 
-    public MyTree(Integer data) {
-        root = new MyTreeNode<>(data);
-        root.setLeftLeaf(null);
-        root.setRightLeaf(null);
-
+    public MyTree() {
     }
 
-    public boolean hasLeftLeaf(MyTreeNode myTreeNode) {
-        if (myTreeNode.getLeftLeaf() == null) {
-            return false;
-        } else return true;
+    private boolean hasLeftLeaf(MyTreeNode myTreeNode) {
+        return myTreeNode.getLeftLeaf() != null;
     }
 
-    public boolean hasRightLeaf(MyTreeNode myTreeNode) {
-        if (myTreeNode.getRightLeaf() == null) {
-            return false;
-        } else return true;
+    private boolean hasRightLeaf(MyTreeNode myTreeNode) {
+        return myTreeNode.getRightLeaf() != null;
     }
 
-    public Compare compareDataValue(MyTreeNode first, MyTreeNode second) {
+    private Compare compareDataValue(MyTreeNode first, MyTreeNode second) {
 
         if ((int) first.getData() < (int) second.getData()) {
             return Compare.BIGGER;
@@ -35,45 +27,54 @@ public class MyTree<Integer> {
     }
 
 
-    public void appendLeaf(MyTreeNode tmpRoot, MyTreeNode myLeaf) {
+    public void appendLeaf(MyTreeNode tmpParent, MyTreeNode myLeaf) {
 
-        myLeaf.setRoot(tmpRoot);
+        if (this.root == null) {
+            this.root = myLeaf;
+        } else {
 
-        if (compareDataValue(tmpRoot, myLeaf) == Compare.SMALLER) {
-            if (!hasLeftLeaf(myLeaf.getRoot())) {
-                myLeaf.getRoot().setLeftLeaf(myLeaf);
-
-            } else {
-                appendLeaf(myLeaf.getRoot().getLeftLeaf(), myLeaf);
+            if (tmpParent == null) {
+                tmpParent = this.root;
             }
 
-        } else if (compareDataValue(tmpRoot, myLeaf) == Compare.BIGGER) {
-            if (!hasRightLeaf(myLeaf.getRoot())) {
-                myLeaf.getRoot().setRightLeaf(myLeaf);
-            } else {
-                appendLeaf(myLeaf.getRoot().getRightLeaf(), myLeaf);
+            myLeaf.setParent(tmpParent);
+
+            if (compareDataValue(tmpParent, myLeaf) == Compare.SMALLER) {
+                if (!hasLeftLeaf(myLeaf.getParent())) {
+                    myLeaf.getParent().setLeftLeaf(myLeaf);
+
+                } else {
+                    appendLeaf(myLeaf.getParent().getLeftLeaf(), myLeaf);
+                }
+
+            } else if (compareDataValue(tmpParent, myLeaf) == Compare.BIGGER) {
+                if (!hasRightLeaf(myLeaf.getParent())) {
+                    myLeaf.getParent().setRightLeaf(myLeaf);
+                } else {
+                    appendLeaf(myLeaf.getParent().getRightLeaf(), myLeaf);
+                }
             }
         }
     }
 
     public MyTreeNode findLeaf(MyTreeNode myLeaf) {
 
-        if (myLeaf.getRoot() == null) {
-            myLeaf.setRoot(this.root);
+        if (myLeaf.getParent() == null) {
+            myLeaf.setParent(this.root);
         }
 
-        if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.EQUAL) {
-            return myLeaf.getRoot();
-        } else if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.SMALLER) {
-            if (myLeaf.getRoot().getLeftLeaf() != null) {
+        if (compareDataValue(myLeaf.getParent(), myLeaf) == Compare.EQUAL) {
+            return myLeaf.getParent();
+        } else if (compareDataValue(myLeaf.getParent(), myLeaf) == Compare.SMALLER) {
+            if (myLeaf.getParent().getLeftLeaf() != null) {
 
-                myLeaf.setRoot(myLeaf.getRoot().getLeftLeaf());
+                myLeaf.setParent(myLeaf.getParent().getLeftLeaf());
                 findLeaf(myLeaf);
             }
-        } else if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.BIGGER) {
-            if (myLeaf.getRoot().getRightLeaf() != null) {
+        } else if (compareDataValue(myLeaf.getParent(), myLeaf) == Compare.BIGGER) {
+            if (myLeaf.getParent().getRightLeaf() != null) {
 
-                myLeaf.setRoot(myLeaf.getRoot().getRightLeaf());
+                myLeaf.setParent(myLeaf.getParent().getRightLeaf());
                 findLeaf(myLeaf);
             }
         } else return null;
@@ -87,13 +88,13 @@ public class MyTree<Integer> {
         if (compareDataValue(root, myLeaf) == Compare.EQUAL) {
             if (hasLeftLeaf(root)) {
 
-                root.getLeftLeaf().setRoot(null);
+                root.getLeftLeaf().setParent(null);
                 appendLeaf(root.getLeftLeaf(), root.getRightLeaf());
                 root = root.getLeftLeaf();
 
             } else if (hasRightLeaf(root)) {
 
-                root.getRightLeaf().setRoot(null);
+                root.getRightLeaf().setParent(null);
                 appendLeaf(root.getRightLeaf(), root.getLeftLeaf());
                 root = root.getRightLeaf();
 
@@ -101,34 +102,35 @@ public class MyTree<Integer> {
                 root = null;
             }
 
-        } else if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.BIGGER) {
+        } else if (compareDataValue(myLeaf.getParent(), myLeaf) == Compare.BIGGER) {
 
-            myLeaf.getRoot().setRightLeaf(null);
+            myLeaf.getParent().setRightLeaf(null);
 
             if (hasRightLeaf(myLeaf)) {
-                myLeaf.getRightLeaf().setRoot(null);
+                myLeaf.getRightLeaf().setParent(null);
                 appendLeaf(root, myLeaf.getRightLeaf());
             }
             if (hasLeftLeaf(myLeaf)) {
-                myLeaf.getLeftLeaf().setRoot(null);
+                myLeaf.getLeftLeaf().setParent(null);
                 appendLeaf(root, myLeaf.getLeftLeaf());
             }
 
 
-        } else if (compareDataValue(myLeaf.getRoot(), myLeaf) == Compare.SMALLER) {
+        } else if (compareDataValue(myLeaf.getParent(), myLeaf) == Compare.SMALLER) {
 
-            myLeaf.getRoot().setLeftLeaf(null);
+            myLeaf.getParent().setLeftLeaf(null);
 
             if (hasRightLeaf(myLeaf)) {
-                myLeaf.getRightLeaf().setRoot(null);
+                myLeaf.getRightLeaf().setParent(null);
                 appendLeaf(root, myLeaf.getRightLeaf());
             }
             if (hasRightLeaf(myLeaf)) {
-                myLeaf.getLeftLeaf().setRoot(null);
+                myLeaf.getLeftLeaf().setParent(null);
                 appendLeaf(root, myLeaf.getLeftLeaf());
             }
 
         }
     }
+
 
 }
