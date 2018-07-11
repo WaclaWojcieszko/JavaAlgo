@@ -3,7 +3,6 @@ package org.wojcieszko.sqrt;
 public class Sqrt {
 
     public static int pow3(int number) {
-        System.out.print(number + " ");
         return number * number * number;
 
     }
