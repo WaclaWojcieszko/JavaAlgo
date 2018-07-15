@@ -22,18 +22,19 @@ public class Change {
 
             List<Integer> moneyLeftCopy = new ArrayList<>(moneyLeft);
             List<Integer> moneyCheckedCopy = new ArrayList<>(moneyChecked);
+
             int searchedCopy = searched;
 
-            if (searched < 0) {
-                return;
+            if (searchedCopy < 0) {
+                continue;
             }
             if (moneyLeftCopy.isEmpty()) {
-                return;
+                continue;
             }
-            if (searched == 0) {
+            if (searchedCopy == 0) {
                 results.add(moneyCheckedCopy);
-                return;
-            } else if (searched > 0) {
+                continue;
+            } else if (searchedCopy > 0) {
                 moneyCheckedCopy.add(coin);
                 searchedCopy -= coin;
                 moneyLeftCopy.remove(coin);
@@ -53,6 +54,7 @@ public class Change {
         List<List<Integer>> results = new ArrayList<>();
         List<Integer> moneyChecked = new ArrayList<>();
         Collections.sort(money);
+        Collections.reverse(money);
 
         changeMoney(money, searched, results, moneyChecked);
         printList(results);
