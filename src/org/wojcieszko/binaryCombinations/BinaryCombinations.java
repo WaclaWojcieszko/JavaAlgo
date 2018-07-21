@@ -1,0 +1,41 @@
+package org.wojcieszko.binaryCombinations;
+
+public class BinaryCombinations {
+
+    public int power2(int x){
+        int value = 1;
+        for (int index= 0; index < x; ++index){
+            value *= 2;
+        }
+        return value;
+    }
+
+//TODO przystosować do wydawania reszty
+
+    public void fun3(int ...data){
+
+        int combinations = power2(data.length);
+
+        for(int counter = 0; counter < combinations; ++counter){
+            int temp = counter;
+            int[] z = new int[data.length];
+
+            for (int index = 0; index < data.length; ++index){
+                z[index] = temp % 2;
+                temp = temp / 2;
+            }
+
+            int value = 0;
+            for (int index = 0; index < data.length; ++index) {
+                value += z[index]*data[index];
+            }
+            System.out.println(value);
+
+
+        }
+
+
+
+    }
+
+}
