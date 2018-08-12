@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.wojcieszko.graph.Graph;
+import org.wojcieszko.dijkstra.Dijkstra;
 
 /**
  * Graph Tester.
@@ -28,60 +28,52 @@ public class DijkstraTest {
      */
     @Test
     public void testGraph() throws Exception {
-        Graph dijkstra = new Graph(10);
+        Dijkstra dijkstra = new Dijkstra (10);
         Assert.assertNotNull(dijkstra);
     }
 
     @Test
     public void testSetNeighbours() throws Exception {
 
-        Graph dijkstra = new Graph(10);
-        dijkstra.setNeighbours(2, 3);
-        Assert.assertEquals(true, dijkstra.neighbours.get(2).get(3));
+        Dijkstra dijkstra = new Dijkstra(10);
+        dijkstra.setNeighbours(2, 3, 5);
+        Assert.assertEquals(5, dijkstra.neighbours.get(2).get(3), 0.01);
     }
 
     @Test
     public void testGraph2() throws Exception {
 
-        Graph dijkstra = new Graph(8);
-        dijkstra.setNeighbours(0, 1);
-        dijkstra.setNeighbours(0, 2);
-        dijkstra.setNeighbours(0, 3);
-        dijkstra.setNeighbours(2, 4);
-        dijkstra.setNeighbours(2, 2);
-        dijkstra.setNeighbours(5, 6);
-        dijkstra.setNeighbours(6, 7);
-        Assert.assertEquals(true, dijkstra.neighbours.get(0).get(1));
+        Dijkstra dijkstra = new Dijkstra(9);
+        dijkstra.setNeighbours(0, 1, 2);
+        dijkstra.setNeighbours(2, 2, 7);
+        dijkstra.setNeighbours(0, 3, 5);
+        dijkstra.setNeighbours(0, 4, 20);
+        dijkstra.setNeighbours(3, 4, 10);
+        dijkstra.setNeighbours(3, 7, 2);
+        dijkstra.setNeighbours(7, 8, 2);
+        dijkstra.setNeighbours(8, 5, 1);
+        dijkstra.setNeighbours(4, 5, 1);
+        dijkstra.setNeighbours(5, 6, 2);
+        Assert.assertEquals(12, dijkstra.findLowestCostPath(0, 6), 0.01);
     }
 
     @Test
     public void testGraph3() throws Exception {
 
-        Graph dijkstra = new Graph(8);
-        dijkstra.setNeighbours(0, 1);
-        dijkstra.setNeighbours(0, 2);
-        dijkstra.setNeighbours(0, 3);
-        dijkstra.setNeighbours(2, 4);
-        dijkstra.setNeighbours(2, 2);
-        dijkstra.setNeighbours(5, 6);
-        dijkstra.setNeighbours(6, 7);
-        Assert.assertEquals(true, dijkstra.findPath(0, 4));
+        Dijkstra dijkstra = new Dijkstra(9);
+        dijkstra.setNeighbours(0, 1, 2);
+        dijkstra.setNeighbours(2, 2, 7);
+        dijkstra.setNeighbours(0, 3, 5);
+        dijkstra.setNeighbours(0, 4, 20);
+        dijkstra.setNeighbours(3, 4, 10);
+        dijkstra.setNeighbours(3, 7, 2);
+        dijkstra.setNeighbours(7, 8, 2);
+        dijkstra.setNeighbours(8, 5, 1);
+        dijkstra.setNeighbours(4, 5, 1);
+        dijkstra.setNeighbours(5, 6, 2);
+        dijkstra.setNeighbours(3, 0, -18);
+        Assert.assertEquals(12, dijkstra.findLowestCostPath(0, 6), 0.01);
     }
-
-    @Test
-    public void testGraph4() throws Exception {
-
-        Graph dijkstra = new Graph(8);
-        dijkstra.setNeighbours(0, 1);
-        dijkstra.setNeighbours(0, 2);
-        dijkstra.setNeighbours(0, 3);
-        dijkstra.setNeighbours(2, 4);
-        dijkstra.setNeighbours(2, 2);
-        dijkstra.setNeighbours(5, 6);
-        dijkstra.setNeighbours(6, 7);
-        Assert.assertEquals(false, dijkstra.findPath(4, 0));
-    }
-
     /**
      * Method: setValue(int nodeIndex, int value)
      */
