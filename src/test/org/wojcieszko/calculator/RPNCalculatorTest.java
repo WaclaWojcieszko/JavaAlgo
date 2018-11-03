@@ -3,11 +3,9 @@ package test.org.wojcieszko.calculator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.wojcieszko.calculator.Calculator;
+import org.wojcieszko.calculator.RPNCalculator;
 
-import static org.junit.Assert.*;
-
-public class CalculatorTest {
+public class RPNCalculatorTest {
 
     @Before
     public void setUp() throws Exception {
@@ -20,7 +18,7 @@ public class CalculatorTest {
     @Test
     public void operate() {
 
-        Calculator calculator = new Calculator();
+        RPNCalculator calculator = new RPNCalculator();
 
         String input = "2 1 2 * ^ =";
 
